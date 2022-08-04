@@ -155,8 +155,8 @@ def delete_recipe(id):
 
 @app.get('/user/recipes/<int:id>')
 def user_recipes(id):
-    recipes = Recipe.query.filter_by(user_id=id)
-    recipes = [recipe.to_dict() for recipe in recipes]
+    user = User.query.get(id)
+    recipes = [recipe.to_dict() for recipe in user.recipes.all()]
     return make_response({"My Recipes": recipes})
 
 
